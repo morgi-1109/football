@@ -1,0 +1,20 @@
+
+.header-menu {
+  display: flex;
+  justify-content: center;
+
+  .btn-container {
+    border: 1px solid grey;
+    border-radius: 10px;
+    display: flex;
+    .country-btn {
+      width: 150px;
+      &:hover {
+        color: blue;
+        font-weight: 500;
+        text-decoration: underline;
+      }
+
+    }
+  }
+}
