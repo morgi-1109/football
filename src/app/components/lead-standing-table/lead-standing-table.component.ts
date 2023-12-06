@@ -1,13 +1,8 @@
-import {
-  Component,
-  Input, OnChanges, SimpleChanges,
-} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges,} from '@angular/core';
 import {FootballSportApiWebService} from "../../services/web/football-sport-api-web.service";
-import {SubSink} from "subsink";
 import {StandingTableColumn} from "../../models/interfaces/standing-table-column";
 import {StandingItem} from "../../models/interfaces/football-api/football-api-standing-return";
-import {ActivatedRoute} from "@angular/router";
-import {catchError, flatMap, ignoreElements, map, Observable, of, scan, tap} from "rxjs";
+import {catchError, ignoreElements, map, Observable, of} from "rxjs";
 
 @Component({
   selector: 'app-lead-standing-table',
@@ -32,7 +27,7 @@ export class LeadStandingTableComponent implements OnChanges{
 
   ]
 
-  constructor(private footballSportApiWeb: FootballSportApiWebService, private activatedRoute: ActivatedRoute) {
+  constructor(private footballSportApiWeb: FootballSportApiWebService) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -55,12 +50,5 @@ export class LeadStandingTableComponent implements OnChanges{
     else {
       this.standings$ = of([])
     }
-
   }
-
-
-
-
-
-
 }
