@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CountryMenuComponent } from './country-menu.component';
+import { CountrySelectorComponent } from './country-selector.component';
 
 describe('CountryMenuComponent', () => {
-  let component: CountryMenuComponent;
-  let fixture: ComponentFixture<CountryMenuComponent>;
+  let component: CountrySelectorComponent;
+  let fixture: ComponentFixture<CountrySelectorComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CountryMenuComponent]
+      declarations: [CountrySelectorComponent]
     });
-    fixture = TestBed.createComponent(CountryMenuComponent);
+    fixture = TestBed.createComponent(CountrySelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

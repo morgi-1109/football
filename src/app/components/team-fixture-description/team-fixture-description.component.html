@@ -1,0 +1,7 @@
+<div [ngClass]="{'d-flex align-items-center': true, 'flex-row-reverse': reverseOrder}">
+  <div style="width: 100px; text-align: center"><img *ngIf="logo" style="height: 60px" [src]="logo"></div>
+  <div style="width: 250px; text-align: center"><span *ngIf="name">{{name}}</span></div>
+  <div style="width: 60px; text-align: center"><span>{{goal}}</span></div>
+</div>
+
+

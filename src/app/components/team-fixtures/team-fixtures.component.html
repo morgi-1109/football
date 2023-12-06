@@ -1,0 +1,20 @@
+<div>
+  <ng-container *ngIf="{fixtures: fixtures$ | async, fixtureError: fixtureLoadingError$ | async} as data">
+    <ng-container *ngIf="data.fixtures; else loadingTemplate">
+      <div *ngFor="let fixture of data.fixtures" class="fixture-line">
+        <app-team-fixture-description [goal]="fixture.goals.home" [logo]="fixture.teams.home.logo"
+                                      [name]="fixture.teams.home.name"></app-team-fixture-description>
+        <div style="width: 100px; text-align: center">-</div>
+        <app-team-fixture-description [reverseOrder]="true" [goal]="fixture.goals.away" [logo]="fixture.teams.away.logo"
+                                      [name]="fixture.teams.away.name"></app-team-fixture-description>
+      </div>
+
+    </ng-container>
+    <ng-template #loadingTemplate>
+      <div *ngIf="!data.fixtureError">
+        loading...
+      </div>
+    </ng-template>
+  </ng-container>
+</div>
+

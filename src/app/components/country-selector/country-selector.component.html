@@ -1,0 +1,7 @@
+<div class="header-menu">
+  <div class="btn-container">
+    <ng-container *ngFor="let country of countryOptions">
+      <button [routerLinkActive]="'active-link'" [routerLink]="['/standing', country.topLeagueId]" class="btn country-btn" [id]="country.id">{{country.label}}</button>
+    </ng-container>
+  </div>
+</div>

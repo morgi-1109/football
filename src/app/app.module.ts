@@ -1,20 +1,29 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CountryMenuComponent } from './components/country-menu/country-menu.component';
-import {CommonModule} from "@angular/common";
+import { CountrySelectorComponent } from './components/country-selector/country-selector.component';
+import { LeadStandingTableComponent } from './components/lead-standing-table/lead-standing-table.component';
+import {HttpClientModule} from "@angular/common/http";
+import { TeamFixturesComponent } from './components/team-fixtures/team-fixtures.component';
+import { StandingComponent } from './pages/standing/standing.component';
+import {FixturesComponent} from "./pages/fixtures/fixtures.component";
+import { TeamFixtureDescriptionComponent } from './components/team-fixture-description/team-fixture-description.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CountryMenuComponent
+    CountrySelectorComponent,
+    LeadStandingTableComponent,
+    FixturesComponent,
+    TeamFixturesComponent,
+    StandingComponent,
+    TeamFixtureDescriptionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CommonModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
