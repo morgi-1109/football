@@ -1,4 +1,4 @@
-export interface FootballApiReturn {
+export interface FootballApiReturnDto {
   get: string | null;
   parameters: any;
   errors: any[] | Record<string, string>; // If code 204 following documentation

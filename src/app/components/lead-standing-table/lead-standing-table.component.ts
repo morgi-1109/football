@@ -1,8 +1,9 @@
 import {Component, Input, OnChanges, SimpleChanges,} from '@angular/core';
-import {FootballSportApiWebService} from "../../services/web/football-sport-api-web.service";
 import {StandingTableColumn} from "../../models/interfaces/standing-table-column";
-import {StandingItem} from "../../models/interfaces/football-api/football-api-standing-return";
+import {StandingItemDto} from "../../models/interfaces/football-api/football-api-standing-return-dto";
 import {catchError, ignoreElements, map, Observable, of} from "rxjs";
+import {DataStorageService} from "../../services/data-storage.service";
+import {StandingViewItem} from "../../models/class/standing-view-item";
 
 @Component({
   selector: 'app-lead-standing-table',
@@ -11,8 +12,8 @@ import {catchError, ignoreElements, map, Observable, of} from "rxjs";
 })
 export class LeadStandingTableComponent implements OnChanges{
   @Input() leagueId?: number;
-  standings$?: Observable<StandingItem[]>;
-  standingsError$?: Observable<StandingItem[]>;
+  standings$?: Observable<StandingViewItem[]>;
+  standingsError$?: Observable<StandingItemDto[]>;
 
   columns: StandingTableColumn[] = [
     {property: 'rank'},
@@ -27,7 +28,7 @@ export class LeadStandingTableComponent implements OnChanges{
 
   ]
 
-  constructor(private footballSportApiWeb: FootballSportApiWebService) {
+  constructor(private dataStorageService: DataStorageService) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -37,18 +38,12 @@ export class LeadStandingTableComponent implements OnChanges{
   }
 
   private loadStanding(leagueId?: number) {
-    if (leagueId) {
-      this.standings$ = this.footballSportApiWeb
-        .getStanding$(new Date().getFullYear(), leagueId)
-        .pipe(
-          map(standingReturn => {
-            return standingReturn.response.reduce((prev, current) => [...prev, ...current.league.standings.flatMap((x) => x)],[] as StandingItem[])
-          }),
-        )
-      this.standingsError$ = this.standings$.pipe(ignoreElements(), catchError((err) => of(err)))
-    }
-    else {
-      this.standings$ = of([])
-    }
+    this.standings$ = this.dataStorageService.getStandingByLeague$(leagueId);
+    this.standingsError$ = this.standings$.pipe(ignoreElements(), catchError((err) => of(err)));
+  }
+
+
+  getStandingProperty(standing: StandingViewItem, propertyName: string): any {
+    return standing[propertyName as keyof StandingViewItem];
   }
 }

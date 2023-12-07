@@ -1,9 +1,9 @@
-import {FootballApiFixtureReturn} from "./models/interfaces/football-api/football-api-fixture-return";
-import {FootballApiStandingReturn} from "./models/interfaces/football-api/football-api-standing-return";
+import {FootballApiFixtureReturnDto} from "./models/interfaces/football-api/football-api-fixture-return-dto";
+import {FootballApiStandingReturnDto} from "./models/interfaces/football-api/football-api-standing-return-dto";
 
 
 
-export const italyResult : FootballApiStandingReturn ={
+export const italyResult : FootballApiStandingReturnDto ={
   "get": "standings",
   "parameters": {
     "season": "2023",
@@ -933,7 +933,7 @@ export const italyResult : FootballApiStandingReturn ={
   ]
 }
 
-export const germanyStanding: FootballApiStandingReturn = {
+export const germanyStanding: FootballApiStandingReturnDto = {
   "get": "standings",
   "parameters": {
     "season": "2023",
@@ -1773,7 +1773,7 @@ export const germanyStanding: FootballApiStandingReturn = {
   ]
 }
 
-export const spainResult:FootballApiStandingReturn = {
+export const spainResult:FootballApiStandingReturnDto = {
   "get": "standings",
   "parameters": {
     "season": "2023",
@@ -2702,7 +2702,7 @@ export const spainResult:FootballApiStandingReturn = {
     }
   ]
 }
-export const franceResult :FootballApiStandingReturn = {
+export const franceResult :FootballApiStandingReturnDto = {
   "get": "standings",
   "parameters": {
     "season": "2023",
@@ -4516,7 +4516,7 @@ export const englandResult = {
   ]
 }
 
-export const fixtureResponse: FootballApiFixtureReturn = {
+export const fixtureResponse: FootballApiFixtureReturnDto = {
   "get": "fixtures",
   "parameters": {
     "last": "10",

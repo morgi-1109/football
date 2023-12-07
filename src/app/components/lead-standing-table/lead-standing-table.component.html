@@ -8,19 +8,13 @@
       <tr *ngFor="let standing of standingData.standings">
         <td *ngFor="let col of columns">
           <ng-container [ngSwitch]="col.property">
-            <ng-container *ngSwitchCase="'rank'">{{standing.rank}}</ng-container>
-            <ng-container *ngSwitchCase="'logo'"><img style="height: 30px" [src]="standing.team.logo"></ng-container>
+            <ng-container *ngSwitchCase="'logo'"><img style="height: 30px" [src]="standing.logo"></ng-container>
             <ng-container *ngSwitchCase="'name'">
-              <a [routerLink]="['/standing',leagueId,'fixture', standing.team.id]">
-                {{standing.team.name}}
+              <a [routerLink]="['/standing',leagueId,'fixture', standing.team?.id]">
+                {{standing.team?.name}}
               </a>
             </ng-container>
-            <ng-container *ngSwitchCase="'played'">{{standing.all.played}}</ng-container>
-            <ng-container *ngSwitchCase="'win'">{{standing.all.win}}</ng-container>
-            <ng-container *ngSwitchCase="'lose'">{{standing.all.lose}}</ng-container>
-            <ng-container *ngSwitchCase="'draw'">{{standing.all.draw}}</ng-container>
-            <ng-container *ngSwitchCase="'goalDiff'">{{standing.goalsDiff}}</ng-container>
-            <ng-container *ngSwitchCase="'points'">{{standing.points}}</ng-container>
+            <ng-container *ngSwitchDefault>{{getStandingProperty(standing, col.property)}}</ng-container>
           </ng-container>
         </td>
       </tr>

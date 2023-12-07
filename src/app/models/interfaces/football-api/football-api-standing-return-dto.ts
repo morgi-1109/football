@@ -1,6 +1,6 @@
-import {FootballApiReturn} from "./football-api-return";
+import {FootballApiReturnDto} from "./football-api-return-dto";
 
-export interface FootballApiStandingReturn extends FootballApiReturn{
+export interface FootballApiStandingReturnDto extends FootballApiReturnDto{
   response: {
     league: {
       id: number | null;
@@ -9,11 +9,11 @@ export interface FootballApiStandingReturn extends FootballApiReturn{
       logo: string | null;
       flag: string | null;
       season: number | null;
-      standings: StandingItem[] []
+      standings: StandingItemDto[] []
     }
   }[];
 }
-export interface StandingItem {
+export interface StandingItemDto {
 
   rank: number | null;
   team: {

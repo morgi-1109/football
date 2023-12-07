@@ -1,12 +1,12 @@
-import {FootballApiReturn} from "./football-api-return";
+import {FootballApiReturnDto} from "./football-api-return-dto";
 
-export interface FootballApiFixtureReturn extends FootballApiReturn {
+export interface FootballApiFixtureReturnDto extends FootballApiReturnDto {
 
-  response: FixtureItem[]
+  response: FixtureItemDto[]
 
 }
 
-export interface FixtureItem {
+export interface FixtureItemDto {
   fixture: {
     id: number | null,
       referee?: any | null,

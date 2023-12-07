@@ -9,7 +9,6 @@ import { TeamFixturesComponent } from './components/team-fixtures/team-fixtures.
 import { StandingComponent } from './pages/standing/standing.component';
 import {FixturesComponent} from "./pages/fixtures/fixtures.component";
 import { TeamFixtureDescriptionComponent } from './components/team-fixture-description/team-fixture-description.component';
-
 @NgModule({
   declarations: [
     AppComponent,

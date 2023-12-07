@@ -1,7 +1,18 @@
-<div [ngClass]="{'d-flex align-items-center': true, 'flex-row-reverse': reverseOrder}">
-  <div style="width: 100px; text-align: center"><img *ngIf="logo" style="height: 60px" [src]="logo"></div>
-  <div style="width: 250px; text-align: center"><span *ngIf="name">{{name}}</span></div>
-  <div style="width: 60px; text-align: center"><span>{{goal}}</span></div>
-</div>
+<ng-container *ngIf="fixtureViewItem && fixtureViewItem.away && fixtureViewItem.home">
+  <div class="d-flex align-items-center">
+    <ng-container *ngFor="let category of categories; odd as isOdd">
+      <div [ngClass]="{'d-flex align-items-center': true, 'flex-row-reverse': category === 'away'}">
+        <div style="width: 100px; text-align: center"><img *ngIf="fixtureViewItem[category].logo" style="height: 60px"
+                                                           [src]="fixtureViewItem[category].logo"></div>
+        <div style="width: 250px; text-align: center"><span
+          *ngIf="fixtureViewItem[category].teamName">{{fixtureViewItem[category].teamName}}</span></div>
+        <div style="width: 60px; text-align: center"><span>{{fixtureViewItem[category].goals}}</span></div>
+        <div *ngIf="isOdd" style="width: 100px; text-align: center"> - </div>
+      </div>
+
+    </ng-container>
+  </div>
+
+</ng-container>
 
 
