@@ -21,7 +21,7 @@ export class LeadStandingTableComponent implements OnChanges{
     {property: 'win', label: 'W'},
     {property: 'lose', label: 'L'},
     {property: 'draw', label: 'D'},
-    {property: 'goalDiff', label: 'Goal Difference'},
+    {property: 'goalsDiff', label: 'Goal Difference'},
     {property: 'points', label: 'Points'}
 
   ]

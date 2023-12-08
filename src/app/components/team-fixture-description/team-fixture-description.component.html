@@ -1,15 +1,15 @@
 <ng-container *ngIf="fixtureViewItem && fixtureViewItem.away && fixtureViewItem.home">
   <div class="d-flex align-items-center">
-    <ng-container *ngFor="let propertyName of fixtureItemKeys; odd as isOdd">
-      <div [ngClass]="{'d-flex align-items-center': true, 'flex-row-reverse': propertyName === 'away'}">
-        <div style="width: 100px; text-align: center"><img *ngIf="fixtureViewItem[propertyName].logo"
-                                                           [src]="fixtureViewItem[propertyName].logo"
+    <ng-container *ngFor="let teamType of teamTypes; even as isEven; index as i">
+      <div [ngClass]="{'d-flex align-items-center': true, 'flex-row-reverse': i == 1}">
+        <div style="width: 100px; text-align: center"><img *ngIf="fixtureViewItem[teamType].logo"
+                                                           [src]="fixtureViewItem[teamType].logo"
                                                            style="height: 60px"></div>
         <div style="width: 250px; text-align: center"><span
-          *ngIf="fixtureViewItem[propertyName].teamName">{{fixtureViewItem[propertyName].teamName}}</span></div>
-        <div style="width: 60px; text-align: center"><span>{{fixtureViewItem[propertyName].goals}}</span></div>
-        <div *ngIf="isOdd" style="width: 100px; text-align: center"> - </div>
+          *ngIf="fixtureViewItem[teamType].teamName">{{fixtureViewItem[teamType].teamName}}</span></div>
+        <div style="width: 60px; text-align: center"><span>{{fixtureViewItem[teamType].goals}}</span></div>
       </div>
+      <div *ngIf="isEven" style="width: 100px; text-align: center"> - </div>
     </ng-container>
   </div>
 
