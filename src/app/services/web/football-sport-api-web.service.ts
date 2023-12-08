@@ -1,12 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {map, Observable, of, tap, throwError} from "rxjs";
-import {
-  FootballApiStandingReturnDto,
-  StandingItemDto
-} from "../../models/interfaces/football-api/football-api-standing-return-dto";
-import {FootballApiFixtureReturnDto} from "../../models/interfaces/football-api/football-api-fixture-return-dto";
-import {englandResult, fixtureResponse, franceResult, germanyStanding, italyResult, spainResult} from "../../mockup";
+import {map, Observable, tap} from "rxjs";
+import {FootballApiStandingReturnDto,} from "../../models/interfaces/dto/football-api-standing-return-dto";
+import {FootballApiFixtureReturnDto} from "../../models/interfaces/dto/football-api-fixture-return-dto";
 import {StandingView} from "../../models/class/standing-view";
 import {FixtureView} from "../../models/class/fixture-view";
 
@@ -28,15 +24,17 @@ export class FootballSportApiWebService {
     httpParams = httpParams.append("league", leagueId);
     const httpHeaders = new HttpHeaders({"x-rapidapi-key": FootballSportApiWebService.API_KEY});
     return this.httpClient
-      .get<FootballApiStandingReturnDto>("https://v3.football.api-sports.io/standings", {params: httpParams, headers: httpHeaders})
+      .get<FootballApiStandingReturnDto>("https://v3.football.api-sports.io/standings", {
+        params: httpParams,
+        headers: httpHeaders
+      })
       .pipe(
         tap((val) => {
-          if (!Array.isArray(val.errors)) {
-            const errors: Record<string, string> = val.errors;
-            throw new Error();
+          if (!!val.errors && !Array.isArray(val.errors)) {
+            throw new Error(this.mapApiErrorsToString(val.errors))
           }
         }),
-        map(standingReturn => new StandingView(standingReturn))
+        map(standingReturn => new StandingView(standingReturn)),
       )
   }
 
@@ -52,14 +50,27 @@ export class FootballSportApiWebService {
     }
     const httpHeaders = new HttpHeaders({"x-rapidapi-key": FootballSportApiWebService.API_KEY});
     return this.httpClient
-      .get<FootballApiFixtureReturnDto>( "https://v3.football.api-sports.io/fixtures", {params: httpParams, headers: httpHeaders})
+      .get<FootballApiFixtureReturnDto>("https://v3.football.api-sports.io/fixtures", {
+        params: httpParams,
+        headers: httpHeaders
+      })
       .pipe(
         tap((val) => {
-        if (!Array.isArray(val.errors)) {
-          throw new Error();
-        }
-      }),
+          if (!!val.errors && !Array.isArray(val.errors)) {
+            throw new Error(this.mapApiErrorsToString(val.errors))
+          }
+        }),
         map(returnDto => new FixtureView(returnDto))
       );
+  }
+
+  private mapApiErrorsToString(error: Record<string, string>) {
+    let errorString: string;
+    try {
+      errorString = Object.keys(error).map(errorKey => error[errorKey]).join('\r\n');
+    } catch {
+      errorString = "Unknown error"
+    }
+    return errorString
   }
 }

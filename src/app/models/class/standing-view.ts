@@ -1,4 +1,4 @@
-import {FootballApiStandingReturnDto, StandingItemDto} from "../interfaces/football-api/football-api-standing-return-dto";
+import {FootballApiStandingReturnDto, StandingItemDto} from "../interfaces/dto/football-api-standing-return-dto";
 import {StandingViewItem} from "./standing-view-item";
 
 export class StandingView {

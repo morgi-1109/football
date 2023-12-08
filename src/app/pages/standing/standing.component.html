@@ -1,7 +1,8 @@
-<div>
-  <app-country-selector></app-country-selector>
+<div class="d-flex flex-column">
+  <div class="flex-shrink-0">
+    <app-country-selector></app-country-selector>
+  </div>
+  <div class="flex-grow-1">
+    <app-lead-standing-table [leagueId]="leagueId"></app-lead-standing-table>
+  </div>
 </div>
-<div>
-  <app-lead-standing-table [leagueId]="leagueId"></app-lead-standing-table>
-</div>
-

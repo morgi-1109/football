@@ -1,11 +1,10 @@
-<ng-container *ngIf="{standings: standings$ | async, standingError: standingsError$ | async} as standingData">
-  <ng-container *ngIf="standingData.standings else loadingTemplate">
-    <table class="table mt-5" *ngIf="standingData.standings.length > 0">
+<ng-container *ngIf="standings$ | async as standings ;else loadingTemplate">
+  <table *ngIf="standings.length > 0" class="table mt-5">
       <thead>
       <tr><th *ngFor="let col of columns">{{col?.label}}</th></tr>
       </thead>
       <tbody>
-      <tr *ngFor="let standing of standingData.standings">
+      <tr *ngFor="let standing of standings">
         <td *ngFor="let col of columns">
           <ng-container [ngSwitch]="col.property">
             <ng-container *ngSwitchCase="'logo'"><img style="height: 30px" [src]="standing.logo"></ng-container>
@@ -20,11 +19,14 @@
       </tr>
       </tbody>
     </table>
-  </ng-container>
-  <ng-template #loadingTemplate>
-    <div *ngIf="!standingData.standingError">Loading ...</div>
-  </ng-template>
 </ng-container>
+
+<ng-template #loadingTemplate>
+  <app-loading></app-loading>
+</ng-template>
+
+
+
 
 
 

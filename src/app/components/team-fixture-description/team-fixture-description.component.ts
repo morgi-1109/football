@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FixtureViewItem} from "../../models/class/fixture-view-item";
 
 @Component({
@@ -6,13 +6,20 @@ import {FixtureViewItem} from "../../models/class/fixture-view-item";
   templateUrl: './team-fixture-description.component.html',
   styleUrls: ['./team-fixture-description.component.scss']
 })
-export class TeamFixtureDescriptionComponent {
-  // @Input() logo?: string | null;
-  // @Input() name?: string | null;
-  // @Input() goal?: number | null;
-  @Input() reverseOrder?: boolean;
-  @Input() type?: "home" | "away";
+export class TeamFixtureDescriptionComponent implements OnInit {
   @Input() fixtureViewItem?: FixtureViewItem;
-  categories: ("home" | "away")[] = ["home", "away"]
+  fixtureItemKeys: (keyof FixtureViewItem)[] = []
 
+  ngOnInit() {
+    this.setFixtureItemKeys();
+  }
+
+
+  private setFixtureItemKeys() {
+    if (this.fixtureViewItem) {
+      this.fixtureItemKeys = Object.getOwnPropertyNames(this.fixtureViewItem) as (keyof FixtureViewItem)[];
+    } else {
+      this.fixtureItemKeys = [];
+    }
+  }
 }

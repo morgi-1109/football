@@ -1,4 +1,4 @@
-import {FixtureItemDto} from "../interfaces/football-api/football-api-fixture-return-dto";
+import {FixtureItemDto} from "../interfaces/dto/football-api-fixture-return-dto";
 
 export class FixtureViewItem {
   away: {

@@ -1,4 +1,4 @@
-import {StandingItemDto} from "../interfaces/football-api/football-api-standing-return-dto";
+import {StandingItemDto} from "../interfaces/dto/football-api-standing-return-dto";
 
 export class StandingViewItem {
   rank?: number | null;

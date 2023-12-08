@@ -1,7 +1,6 @@
 import {Component, Input, OnChanges, SimpleChanges,} from '@angular/core';
 import {StandingTableColumn} from "../../models/interfaces/standing-table-column";
-import {StandingItemDto} from "../../models/interfaces/football-api/football-api-standing-return-dto";
-import {catchError, ignoreElements, map, Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 import {DataStorageService} from "../../services/data-storage.service";
 import {StandingViewItem} from "../../models/class/standing-view-item";
 
@@ -13,7 +12,6 @@ import {StandingViewItem} from "../../models/class/standing-view-item";
 export class LeadStandingTableComponent implements OnChanges{
   @Input() leagueId?: number;
   standings$?: Observable<StandingViewItem[]>;
-  standingsError$?: Observable<StandingItemDto[]>;
 
   columns: StandingTableColumn[] = [
     {property: 'rank'},
@@ -39,7 +37,6 @@ export class LeadStandingTableComponent implements OnChanges{
 
   private loadStanding(leagueId?: number) {
     this.standings$ = this.dataStorageService.getStandingByLeague$(leagueId);
-    this.standingsError$ = this.standings$.pipe(ignoreElements(), catchError((err) => of(err)));
   }
 
 

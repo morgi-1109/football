@@ -1,16 +1,11 @@
 <div>
-  <ng-container *ngIf="{fixtures: fixtures$ | async, fixtureError: fixtureLoadingError$ | async} as data">
-    <ng-container *ngIf="data.fixtures; else loadingTemplate">
-      <div *ngFor="let fixture of data.fixtures" class="fixture-line">
-        <app-team-fixture-description [reverseOrder]="true" [fixtureViewItem]="fixture"></app-team-fixture-description>
-      </div>
-
-    </ng-container>
-    <ng-template #loadingTemplate>
-      <div *ngIf="!data.fixtureError">
-        loading...
-      </div>
-    </ng-template>
+  <ng-container *ngIf="fixtures$ | async as fixtures; else loadingTemplate">
+    <div *ngFor="let fixture of fixtures" class="fixture-line">
+      <app-team-fixture-description [fixtureViewItem]="fixture"></app-team-fixture-description>
+    </div>
   </ng-container>
+  <ng-template #loadingTemplate>
+    <app-loading></app-loading>
+  </ng-template>
 </div>
 

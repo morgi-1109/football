@@ -1,12 +1,10 @@
-import { Injectable } from '@angular/core';
-import {map, Observable, of, Subject} from "rxjs";
-import {StandingItemDto} from "../models/interfaces/football-api/football-api-standing-return-dto";
+import {Injectable} from '@angular/core';
+import {catchError, map, Observable, of, Subject} from "rxjs";
 import {FootballSportApiWebService} from "./web/football-sport-api-web.service";
-import {FixtureItemDto} from "../models/interfaces/football-api/football-api-fixture-return-dto";
-import {FixtureView} from "../models/class/fixture-view";
-import {StandingView} from "../models/class/standing-view";
 import {FixtureViewItem} from "../models/class/fixture-view-item";
 import {StandingViewItem} from "../models/class/standing-view-item";
+import {Alert} from "../models/interfaces/alert";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +13,8 @@ export class DataStorageService {
 
   private standings: Record<number, StandingViewItem[]> = {};
   private fixtures: Record<number, FixtureViewItem[]> = {};
-  private subject: Subject<{message: string, header: string}> = new Subject<{message: string, header: string}>();
+  private alertSubject: Subject<Alert | undefined> = new Subject<Alert | undefined>();
+  alert$ = this.alertSubject.asObservable();
 
   constructor(private footballSportApiWeb: FootballSportApiWebService) { }
 
@@ -27,10 +26,12 @@ export class DataStorageService {
       else {
         return this.footballSportApiWeb
           .getFixtures$({last: 10, team: teamId})
-          .pipe(map((responseItem) => {
+          .pipe(
+            map((responseItem) => {
             this.fixtures[teamId] = responseItem.fixtures;
             return this.fixtures[teamId];
-          }));
+            }),
+            catchError((error) => this.catchErrorRequest(error)));
       }
     }
     else {
@@ -50,12 +51,29 @@ export class DataStorageService {
             map(standingReturn => {
               this.standings[leagueId] = standingReturn.standings;
               return this.standings[leagueId];
-            })
+            }),
+            catchError((error) => this.catchErrorRequest(error))
           )
       }
     }
     else {
       return of([]);
     }
+  }
+
+  showAlert(alert: Alert) {
+    this.alertSubject.next(alert);
+    const timeout = setTimeout(() => {
+      this.alertSubject.next(undefined);
+      clearTimeout(timeout);
+    }, 3000)
+  }
+
+  private catchErrorRequest(error: HttpErrorResponse) {
+    this.showAlert({header: "Error", message: "Something bad happened; please try again later.", severity: "danger"})
+    this.showAlert({header: "Error", message: "Something bad happened; please try again later.", severity: "danger"})
+    this.showAlert({header: "Error", message: "Something bad happened; please try again later.", severity: "danger"})
+    console.log(error);
+    return of([])
   }
 }
