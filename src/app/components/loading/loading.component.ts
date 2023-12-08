@@ -6,6 +6,4 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./loading.component.scss']
 })
 export class LoadingComponent {
-  @Input() isShow = true;
-
 }

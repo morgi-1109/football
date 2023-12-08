@@ -15,6 +15,7 @@ export class DataStorageService {
   private fixtures: Record<number, FixtureViewItem[]> = {};
   private alertSubject: Subject<Alert | undefined> = new Subject<Alert | undefined>();
   alert$ = this.alertSubject.asObservable();
+  private timeoutID?: number;
 
   constructor(private footballSportApiWeb: FootballSportApiWebService) { }
 
@@ -62,16 +63,16 @@ export class DataStorageService {
   }
 
   showAlert(alert: Alert) {
+    if (this.timeoutID) {
+      clearTimeout(this.timeoutID);
+    }
     this.alertSubject.next(alert);
-    const timeout = setTimeout(() => {
+    this.timeoutID = setTimeout(() => {
       this.alertSubject.next(undefined);
-      clearTimeout(timeout);
     }, 3000)
   }
 
   private catchErrorRequest(error: HttpErrorResponse) {
-    this.showAlert({header: "Error", message: "Something bad happened; please try again later.", severity: "danger"})
-    this.showAlert({header: "Error", message: "Something bad happened; please try again later.", severity: "danger"})
     this.showAlert({header: "Error", message: "Something bad happened; please try again later.", severity: "danger"})
     console.log(error);
     return of([])
