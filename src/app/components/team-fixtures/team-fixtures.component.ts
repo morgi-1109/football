@@ -10,7 +10,7 @@ import {FixtureViewItem} from "../../models/class/fixture-view-item";
 })
 export class TeamFixturesComponent implements OnInit {
   @Input() teamId?: number;
-  fixtures$?: Observable<FixtureViewItem[]>;
+ fixtures$?: Observable<FixtureViewItem[]>;
 
   constructor(private dataStorageService: DataStorageService) {
   }
@@ -18,4 +18,6 @@ export class TeamFixturesComponent implements OnInit {
   ngOnInit(): void {
     this.fixtures$ = this.dataStorageService.getFixtureByTeams$(this.teamId)
   }
+
+
 }

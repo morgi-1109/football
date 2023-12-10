@@ -8,12 +8,12 @@
         <td *ngFor="let col of columns">
           <ng-container [ngSwitch]="col.property">
             <ng-container *ngSwitchCase="'logo'"><img style="height: 30px" [src]="standing.logo"></ng-container>
-            <ng-container *ngSwitchCase="'name'">
+            <ng-container *ngSwitchCase="'teamName'">
               <a [routerLink]="['/standing',leagueId,'fixture', standing.team?.id]">
-                {{standing.team?.name}}
+                {{standing.teamName}}
               </a>
             </ng-container>
-            <ng-container *ngSwitchDefault>{{getStandingProperty(standing, col.property)}}</ng-container>
+            <ng-container *ngSwitchDefault>{{standing[col.property]}}</ng-container>
           </ng-container>
         </td>
       </tr>

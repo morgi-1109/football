@@ -8,7 +8,7 @@ import {FixtureViewItem} from "../../models/class/fixture-view-item";
 })
 export class TeamFixtureDescriptionComponent implements OnInit {
   @Input() fixtureViewItem?: FixtureViewItem;
-  teamTypes: ('away' | 'home')[] = ['away', 'home']
+  teamTypes: (keyof FixtureViewItem)[] = ['away', 'home']
 
   ngOnInit() {
 

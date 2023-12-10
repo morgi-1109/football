@@ -3,7 +3,6 @@ import {StandingItemDto} from "../interfaces/dto/football-api-standing-return-dt
 export class StandingViewItem {
   rank?: number | null;
   logo?: string | null;
-  // league?: {id?: number, name?: string} | null;
   team?: {id?: number | null, name?: string | null} | null;
   played?: number | null;
   win?: number | null;
@@ -22,5 +21,13 @@ export class StandingViewItem {
     this.draw = standingItemDto.all.draw;
     this.goalsDiff = standingItemDto.goalsDiff;
     this.points = standingItemDto.points;
+  }
+
+  get teamName(): string |undefined | null {
+    return this.team?.name;
+  }
+
+  get teamId(): number | undefined | null {
+    return this.team?.id;
   }
 }

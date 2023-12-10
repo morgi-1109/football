@@ -16,7 +16,7 @@ export class LeadStandingTableComponent implements OnChanges{
   columns: StandingTableColumn[] = [
     {property: 'rank'},
     {property: 'logo'},
-    {property: 'name', label: 'Name'},
+    {property: 'teamName', label: 'Name'},
     {property: 'played', label: 'Games'},
     {property: 'win', label: 'W'},
     {property: 'lose', label: 'L'},
@@ -40,7 +40,4 @@ export class LeadStandingTableComponent implements OnChanges{
   }
 
 
-  getStandingProperty(standing: StandingViewItem, propertyName: string): any {
-    return standing[propertyName as keyof StandingViewItem];
-  }
 }
